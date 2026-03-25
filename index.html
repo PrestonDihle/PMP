@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>12th CAB Pre-Mishap Plan</title>
+<style>
+:root {
+  --navy: #1B3A6B;
+  --navy-dark: #0D1E3D;
+  --navy-card: #162E58;
+  --gold: #C9940A;
+  --gold-light: #F0B429;
+  --danger: #C0392B;
+  --danger-dark: #96281B;
+  --success: #1E8449;
+  --text: #F0F4F8;
+  --text-dim: #A8BDD0;
+  --border: rgba(201,148,10,0.3);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; background: var(--navy-dark); color: var(--text); font-family: 'Segoe UI', Arial, sans-serif; font-size: 16px; }
+body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; }
+
+/* HEADER */
+#header {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+  border-bottom: 2px solid var(--gold);
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  position: sticky; top: 0; z-index: 100;
+}
+#header .shield { font-size: 28px; line-height: 1; }
+#header .title-block { flex: 1; }
+#header .unit { font-size: 11px; color: var(--gold-light); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+#header .doc-title { font-size: 14px; font-weight: 700; color: var(--text); }
+
+/* PAGES */
+#content { flex: 1; overflow-y: auto; padding-bottom: 70px; }
+.page { display: none; }
+.page.active { display: block; }
+
+/* BOTTOM NAV */
+#nav {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px;
+  background: var(--navy-dark); border-top: 2px solid var(--gold);
+  display: flex; z-index: 100;
+}
+.nav-btn {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 6px 2px; cursor: pointer; border: none; background: transparent;
+  color: var(--text-dim); font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
+  text-transform: uppercase; min-height: 58px; transition: color 0.2s;
+}
+.nav-btn .icon { font-size: 20px; margin-bottom: 2px; }
+.nav-btn.active { color: var(--gold-light); }
+.nav-btn.active .icon { filter: drop-shadow(0 0 4px var(--gold)); }
+
+/* CARDS & SECTIONS */
+.section { padding: 14px; }
+.card {
+  background: var(--navy-card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 14px; margin-bottom: 12px;
+}
+.card-header {
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--gold-light); margin-bottom: 10px;
+}
+.section-title {
+  font-size: 13px; font-weight: 700; color: var(--gold-light);
+  letter-spacing: 1px; text-transform: uppercase;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 14px;
+}
+
+/* EMERGENCY BUTTON */
+.emerg-btn {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--danger); border-radius: 10px; padding: 14px 16px;
+  text-decoration: none; margin-bottom: 10px; border: 2px solid var(--danger-dark);
+}
+.emerg-btn:active { opacity: 0.8; }
+.emerg-btn .label { font-size: 13px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 0.5px; }
+.emerg-btn .number { font-size: 18px; font-weight: 700; color: #fff; }
+.emerg-btn .call-icon { font-size: 22px; }
+
+/* CONTACT ROWS */
+.contact-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-info { flex: 1; }
+.contact-role { font-size: 11px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.5px; }
+.contact-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.contact-phones { display: flex; gap: 8px; margin-top: 4px; }
+.call-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--navy); border: 1px solid var(--border); border-radius: 6px;
+  padding: 4px 8px; text-decoration: none; color: var(--text); font-size: 11px;
+}
+.call-btn .ph-type { color: var(--gold-light); font-weight: 700; font-size: 10px; }
+.call-btn:active { background: var(--navy-dark); }
+
+/* CHECKLIST */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px; line-height: 1.4;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li input[type=checkbox] { width: 20px; height: 20px; margin-top: 1px; flex-shrink: 0; accent-color: var(--gold); cursor: pointer; }
+.check-num { color: var(--gold-light); font-weight: 700; font-size: 12px; flex-shrink: 0; min-width: 20px; margin-top: 2px; }
+
+/* DO / DONT */
+.do-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px; line-height: 1.4; align-items: flex-start; }
+.do-item:last-child { border-bottom: none; }
+.do-badge { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+/* WORKSHEET FORM */
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 12px; font-weight: 700; color: var(--gold-light); letter-spacing: 0.5px; margin-bottom: 5px; display: block; text-transform: uppercase; }
+.form-label span { color: var(--text-dim); font-weight: 400; text-transform: none; letter-spacing: 0; }
+.form-input, .form-textarea, .form-select {
+  width: 100%; background: var(--navy-dark); border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 12px; color: var(--text); font-size: 14px;
+  font-family: inherit; outline: none;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-textarea { min-height: 70px; resize: vertical; }
+.toggle-row { display: flex; gap: 8px; margin-top: 6px; }
+.toggle-btn {
+  flex: 1; padding: 8px; border-radius: 8px; border: 2px solid var(--border);
+  background: var(--navy-dark); color: var(--text-dim); font-weight: 700; font-size: 14px;
+  cursor: pointer; text-align: center;
+}
+.toggle-btn.yes.sel { background: var(--success); border-color: var(--success); color: #fff; }
+.toggle-btn.no.sel { background: var(--danger); border-color: var(--danger); color: #fff; }
+
+/* ROLE ACCORDION */
+.role-header {
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--navy-card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 14px; margin-bottom: 8px; cursor: pointer;
+}
+.role-header.open { border-radius: 10px 10px 0 0; border-bottom-color: transparent; }
+.role-title { font-size: 15px; font-weight: 700; color: var(--text); }
+.role-sub { font-size: 12px; color: var(--text-dim); }
+.role-chevron { font-size: 18px; color: var(--gold-light); transition: transform 0.2s; }
+.role-header.open .role-chevron { transform: rotate(180deg); }
+.role-body {
+  display: none; background: rgba(22,46,88,0.6); border: 1px solid var(--border);
+  border-top: none; border-radius: 0 0 10px 10px; padding: 12px 14px; margin-bottom: 8px;
+}
+.role-body.open { display: block; }
+
+/* TABS (reference) */
+.ref-tabs { display: flex; gap: 6px; margin-bottom: 14px; overflow-x: auto; padding-bottom: 4px; }
+.ref-tab {
+  flex-shrink: 0; padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border);
+  background: var(--navy-dark); color: var(--text-dim); font-size: 12px; font-weight: 700;
+  cursor: pointer; white-space: nowrap;
+}
+.ref-tab.active { background: var(--gold); color: var(--navy-dark); border-color: var(--gold); }
+.ref-panel { display: none; }
+.ref-panel.active { display: block; }
+
+/* TABLE */
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th { background: var(--navy); color: var(--gold-light); font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; padding: 8px 6px; text-align: left; border-bottom: 1px solid var(--border); }
+.data-table td { padding: 8px 6px; border-bottom: 1px solid rgba(255,255,255,0.06); vertical-align: top; }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table a { color: var(--gold-light); text-decoration: none; }
+
+/* MEDEVAC */
+.medevac-line { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07); align-items: flex-start; }
+.medevac-line:last-child { border-bottom: none; }
+.line-num { background: var(--gold); color: var(--navy-dark); font-weight: 700; font-size: 12px; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.line-content { flex: 1; }
+.line-title { font-size: 13px; font-weight: 700; color: var(--text); }
+.line-detail { font-size: 12px; color: var(--text-dim); margin-top: 3px; line-height: 1.4; }
+
+/* ALERT BANNER */
+.alert-banner {
+  background: var(--danger); border-radius: 8px; padding: 10px 14px;
+  font-size: 13px; font-weight: 700; color: #fff; text-align: center;
+  letter-spacing: 0.5px; margin-bottom: 12px;
+}
+
+/* STEP BADGE */
+.step-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--gold); color: var(--navy-dark); font-weight: 700; font-size: 11px;
+  border-radius: 4px; padding: 2px 6px; margin-right: 6px; flex-shrink: 0;
+}
+
+/* HOSPITAL ROW */
+.hospital-row { padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.hospital-row:last-child { border-bottom: none; }
+.hospital-name { font-size: 14px; font-weight: 700; color: var(--text); }
+.hospital-meta { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+.hospital-phone { margin-top: 6px; }
+
+/* RESET BTN */
+.reset-btn {
+  background: transparent; border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text-dim); font-size: 13px; padding: 8px 16px; cursor: pointer; width: 100%; margin-top: 8px;
+}
+.reset-btn:active { background: var(--navy-card); }
+
+.pri-alarm-block {
+  background: linear-gradient(135deg, #6B1B1B, #8B2020);
+  border: 2px solid #C0392B; border-radius: 12px; padding: 16px; margin-bottom: 14px; text-align: center;
+}
+.pri-alarm-block .label { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #FFB3B3; text-transform: uppercase; }
+.pri-alarm-block .name { font-size: 15px; font-weight: 700; color: #fff; margin: 4px 0; }
+.pri-alarm-block a.big-call {
+  display: block; background: #C0392B; color: #fff; border-radius: 10px;
+  padding: 12px; font-size: 20px; font-weight: 700; text-decoration: none;
+  margin-top: 10px; letter-spacing: 1px;
+}
+.pri-alarm-block a.big-call:active { background: #96281B; }
+
+.overdue-step { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.07); align-items: flex-start; }
+.overdue-step:last-child { border-bottom: none; }
+.step-circle { background: var(--navy); border: 2px solid var(--gold); color: var(--gold-light); font-weight: 700; font-size: 14px; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-text { flex: 1; font-size: 14px; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <div class="shield">🦅</div>
+  <div class="title-block">
+    <div class="unit">12th Combat Aviation Brigade</div>
+    <div class="doc-title">Pre-Mishap Plan &mdash; JAN 2026</div>
+  </div>
+</div>
+
+<div id="content">
+
+<!-- ===== HOME PAGE ===== -->
+<div class="page active" id="page-home">
+  <div class="section">
+    <div class="pri-alarm-block">
+      <div class="label">&#9888; Primary Crash Alarm</div>
+      <div class="name">12th CAB Battle CPT / Battle NCO</div>
+      <a class="big-call" href="tel:3145870774">&#128222; DSN 314-587-0774</a>
+    </div>
+
+    <div class="section-title">Emergency Services</div>
+    <a class="emerg-btn" href="tel:112">
+      <div><div class="label">Crash Rescue / Fire / Ambulance</div><div class="number">112</div></div>
+      <div class="call-icon">&#128222;</div>
+    </a>
+    <a class="emerg-btn" href="tel:110" style="background:#7B3F00;border-color:#5D2E00;">
+      <div><div class="label">Law Enforcement</div><div class="number">110 &nbsp;|&nbsp; 314-587-1110</div></div>
+      <div class="call-icon">&#128222;</div>
+    </a>
+
+    <div class="section-title" style="margin-top:18px;">Initiate Pre-Accident Plan When</div>
+    <div class="card">
+      <ul class="checklist" style="list-style:none;">
+        <li style="border:none;padding:6px 0;font-size:14px;">&#9992;&#65039; Aircraft / Army Motor Vehicle accident</li>
+        <li style="border:none;padding:6px 0;font-size:14px;">&#128718; Precautionary Landing (off-installation)</li>
+        <li style="border:none;padding:6px 0;font-size:14px;">&#128295; Any damage to an aircraft</li>
+        <li style="border:none;padding:6px 0;font-size:14px;">&#128681; Overdue Aircraft / Fallen Angel</li>
+        <li style="border:none;padding:6px 0;font-size:14px;">&#128997; Death or critical injury to unit personnel</li>
+        <li style="border:none;padding:6px 0;font-size:14px;">&#9888; Hazardous material spill</li>
+        <li style="border:none;padding:6px 0;font-size:14px;">&#128203; Any reportable incident in the CCIR</li>
+      </ul>
+    </div>
+
+    <div class="section-title">Accident Do's</div>
+    <div class="card">
+      <div class="do-item"><span class="do-badge">&#9989;</span>Allow medical personnel to treat and transport the injured.</div>
+      <div class="do-item"><span class="do-badge">&#9989;</span>Allow military police and civil authorities to assist with security.</div>
+      <div class="do-item"><span class="do-badge">&#9989;</span>Direct questions from civil authorities to the senior military person present.</div>
+      <div class="do-item"><span class="do-badge">&#9989;</span>Secure classified/sensitive documents and equipment if possible without endangering personnel or disturbing wreckage.</div>
+    </div>
+
+    <div class="section-title">Accident Do NOT's</div>
+    <div class="card">
+      <div class="do-item"><span class="do-badge">&#10060;</span>Abandon the telephone that received the initial call unless relieved by CDR, XO, or S-3.</div>
+      <div class="do-item"><span class="do-badge">&#10060;</span>Discuss the accident with anyone except key personnel in this plan.</div>
+      <div class="do-item"><span class="do-badge">&#10060;</span>Interfere with crash rescue or medical personnel. <strong>Lifesaving is the first priority.</strong></div>
+      <div class="do-item"><span class="do-badge">&#10060;</span>Interfere with or refuse to cooperate with military police or local authorities.</div>
+      <div class="do-item"><span class="do-badge">&#10060;</span>Move the injured unless fire is present or other immediate danger exists.</div>
+      <div class="do-item"><span class="do-badge">&#10060;</span>Approach a burning aircraft or vehicle except to save a life.</div>
+      <div class="do-item"><span class="do-badge">&#10060;</span>Disturb the wreckage except to save a life or treat the injured.</div>
+      <div class="do-item"><span class="do-badge">&#10060;</span>Give phone numbers to anyone except emergency or key personnel.</div>
+    </div>
+
+    <div class="card" style="font-size:13px;color:var(--text-dim);text-align:center;">
+      Upon completing notification, BOC begins DA Form 1594 Staff Duty Log and keeps it updated with all personnel/times contacted. Minimize use of primary phone line.
+    </div>
+  </div>
+</div>
+
+<!-- ===== CONTACTS PAGE ===== -->
+<div class="page" id="page-contacts">
+  <div class="section">
+    <div class="section-title">Step 2 &mdash; Notify In Order</div>
+    <div class="alert-banner">DO NOT discuss accident details with anyone not on this list</div>
+
+    <div class="card">
+      <div class="card-header">CAB Secondary Alarm &mdash; Notify After Emergency Services</div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">S-3</div>
+          <div class="contact-name">MAJ Barnes</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870711"><span class="ph-type">DSN</span> 587-0711</a>
+            <a class="call-btn" href="tel:01609771-8116"><span class="ph-type">CELL</span> 0160 977-18116</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">OPS SGM</div>
+          <div class="contact-name">1SG Cromwell</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870730"><span class="ph-type">DSN</span> 587-0730</a>
+            <a class="call-btn" href="tel:06111435870730"><span class="ph-type">CELL</span> 0611 143 5870730</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Commander</div>
+          <div class="contact-name">COL Bock</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870701"><span class="ph-type">DSN</span> 587-0701</a>
+            <a class="call-btn" href="tel:01622572685"><span class="ph-type">CELL</span> 0162 257-2685</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">XO</div>
+          <div class="contact-name">MAJ Grubbs</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870704"><span class="ph-type">DSN</span> 587-0704</a>
+            <a class="call-btn" href="tel:01622676422"><span class="ph-type">CELL</span> 0162 267 6422</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">12th CAB BOC</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870817"><span class="ph-type">DSN</span> 587-0817</a>
+            <a class="call-btn" href="tel:3145870816"><span class="ph-type">DSN2</span> 587-0816</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">ASO (Safety)</div>
+          <div class="contact-name">CW4 Bowyer</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870774"><span class="ph-type">DSN</span> 587-0774</a>
+            <a class="call-btn" href="tel:01721424817"><span class="ph-type">CELL</span> 0172 142-4817</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">S-1</div>
+          <div class="contact-name">CPT Hafen</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870709"><span class="ph-type">DSN</span> 587-0709</a>
+            <a class="call-btn" href="tel:01622563391"><span class="ph-type">CELL</span> 0162 256-3391</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">S-2</div>
+          <div class="contact-name">CPT Grant</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870710"><span class="ph-type">DSN</span> 587-0710</a>
+            <a class="call-btn" href="tel:7579414246"><span class="ph-type">CELL</span> 757-941-4246</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">S-6</div>
+          <div class="contact-name">MAJ Burchett</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870713"><span class="ph-type">DSN</span> 587-0713</a>
+            <a class="call-btn" href="tel:01721408048"><span class="ph-type">CELL</span> 0172 140-8048</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Flight Surgeon / Senior PA</div>
+          <div class="contact-name">MAJ Jones</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145903637"><span class="ph-type">DSN</span> 590-3637</a>
+            <a class="call-btn" href="tel:016094474188"><span class="ph-type">CELL</span> 0160 94474188</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">CSM</div>
+          <div class="contact-name">CSM Anderson</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870705"><span class="ph-type">DSN</span> 587-0705</a>
+            <a class="call-btn" href="tel:01622517057"><span class="ph-type">CELL</span> 0162 251-7057</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">JAG Officer</div>
+          <div class="contact-name">MAJ Dombrosky</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870755"><span class="ph-type">DSN</span> 587-0755</a>
+            <a class="call-btn" href="tel:015256955209"><span class="ph-type">CELL</span> 0152 569-55209</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">BAMO</div>
+          <div class="contact-name">CW5 Everett</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870785"><span class="ph-type">DSN</span> 587-0785</a>
+            <a class="call-btn" href="tel:01622550236"><span class="ph-type">CELL</span> 0162 255-0236</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Standardization Officer</div>
+          <div class="contact-name">CW5 Weisskopf</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870773"><span class="ph-type">DSN</span> 587-0773</a>
+            <a class="call-btn" href="tel:015224476649"><span class="ph-type">CELL</span> 0152 2447-6649</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">CWOB</div>
+          <div class="contact-name">CW5 Hules</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870706"><span class="ph-type">DSN</span> 587-0706</a>
+            <a class="call-btn" href="tel:01622965412"><span class="ph-type">CELL</span> 0162 296-5412</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="section-title">Additional Contacts</div>
+    <div class="card">
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">BDE Flight Surgeon</div>
+          <div class="contact-name">MAJ Canipe</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:01622341588"><span class="ph-type">CELL</span> 0162 234-1588</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">2-159 AB Flight Surgeon</div>
+          <div class="contact-name">CPT Askew</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:01622559947"><span class="ph-type">CELL</span> 0162 255-9947</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">1-214 GSAB Flight Surgeon</div>
+          <div class="contact-name">CPT Garner</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145468411"><span class="ph-type">DSN</span> 546-8411</a>
+            <a class="call-btn" href="tel:016091780546"><span class="ph-type">CELL</span> 0160 9178-0546</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">2-159 AB PA</div>
+          <div class="contact-name">CPT Glick</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:015174427492"><span class="ph-type">CELL</span> 0151 74427492</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Chaplain</div>
+          <div class="contact-name">MAJ Schultz</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870765"><span class="ph-type">DSN</span> 587-0765</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">V Corps Safety Office</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3125835504"><span class="ph-type">DSN</span> 983-5504</a>
+            <a class="call-btn" href="tel:01734177986"><span class="ph-type">CELL</span> 0173 417 7986</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">V Corps Safety (Accident Board)</div>
+          <div class="contact-name">Cell</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145388778"><span class="ph-type">DSN</span> 538-8778</a>
+            <a class="call-btn" href="tel:5029362403"><span class="ph-type">CELL</span> 502-936-2403</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">BDE PAO</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870778"><span class="ph-type">DSN</span> 587-0778</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Katterbach Army Medical Clinic</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145903600"><span class="ph-type">DSN</span> 590-3600</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Katterbach Provost Marshal</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145871110"><span class="ph-type">DSN</span> 587-1110</a>
+            <a class="call-btn" href="tel:06111435871110"><span class="ph-type">CIV</span> 0611 143 5871110</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">AAHP Base Ops (Ansbach)</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145870770"><span class="ph-type">DSN</span> 587-0770</a>
+            <a class="call-btn" href="tel:096417058700770"><span class="ph-type">CIV</span> 09641-705870770</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">IAHP Base Ops (Illesheim)</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:3145876503"><span class="ph-type">DSN</span> 587-6503</a>
+            <a class="call-btn" href="tel:096417058706503"><span class="ph-type">CIV</span> 09641-705870782</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== WORKSHEET PAGE ===== -->
+<div class="page" id="page-worksheet">
+  <div class="section">
+    <div class="section-title">Mishap Information Worksheet</div>
+    <div class="card" style="font-size:13px;color:var(--text-dim);margin-bottom:16px;">
+      <strong style="color:var(--gold-light);">Step 1:</strong> Obtain as much information as possible — <u>do NOT delay reporting basic information.</u>
+    </div>
+
+    <div id="worksheet-form">
+      <div class="form-group">
+        <label class="form-label">A. Name / Rank / Call Sign <span>(caller)</span></label>
+        <input class="form-input" type="text" placeholder="Enter name, rank, or call sign">
+      </div>
+      <div class="form-group">
+        <label class="form-label">B. Phone / Radio Freq <span>(caller)</span></label>
+        <input class="form-input" type="text" placeholder="Phone number or radio frequency">
+      </div>
+      <div class="form-group">
+        <label class="form-label">C. Exact Location / Grid of Accident</label>
+        <input class="form-input" type="text" placeholder="Grid coord or location description">
+      </div>
+      <div class="form-group">
+        <label class="form-label">D. Aircraft / Vehicle Type, Call Sign, Tail/Bumper</label>
+        <input class="form-input" type="text" placeholder="e.g., UH-60 / Griffin 21 / 12-xxxxx">
+      </div>
+      <div class="form-group">
+        <label class="form-label">E. Number of Personnel on Board</label>
+        <input class="form-input" type="number" placeholder="0" min="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">F. Injuries?</label>
+        <div class="toggle-row">
+          <button class="toggle-btn yes" onclick="toggle(this,'yes')">YES</button>
+          <button class="toggle-btn no" onclick="toggle(this,'no')">NO</button>
+        </div>
+        <input class="form-input" type="text" placeholder="Number and severity of injuries" style="margin-top:8px;">
+      </div>
+      <div class="form-group">
+        <label class="form-label">G. Fatalities?</label>
+        <div class="toggle-row">
+          <button class="toggle-btn yes" onclick="toggle(this,'yes')">YES</button>
+          <button class="toggle-btn no" onclick="toggle(this,'no')">NO</button>
+        </div>
+        <input class="form-input" type="number" placeholder="Number of fatalities" style="margin-top:8px;" min="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label">H. Fire Involved?</label>
+        <div class="toggle-row">
+          <button class="toggle-btn yes" onclick="toggle(this,'yes')">YES</button>
+          <button class="toggle-btn no" onclick="toggle(this,'no')">NO</button>
+        </div>
+        <label class="form-label" style="margin-top:10px;">Explosives Involved?</label>
+        <div class="toggle-row">
+          <button class="toggle-btn yes" onclick="toggle(this,'yes')">YES</button>
+          <button class="toggle-btn no" onclick="toggle(this,'no')">NO</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">I. Hazardous Materials?</label>
+        <div class="toggle-row">
+          <button class="toggle-btn yes" onclick="toggle(this,'yes')">YES</button>
+          <button class="toggle-btn no" onclick="toggle(this,'no')">NO</button>
+        </div>
+        <input class="form-input" type="text" placeholder="Type of hazmat" style="margin-top:8px;">
+      </div>
+      <div class="form-group">
+        <label class="form-label">J. Unit Owning Aircraft / Vehicle</label>
+        <input class="form-input" type="text" placeholder="Unit designation">
+      </div>
+      <div class="form-group">
+        <label class="form-label">K. Brief Description of What Happened</label>
+        <textarea class="form-textarea" placeholder="Describe the accident..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">L. Date and Time of Accident</label>
+        <input class="form-input" type="datetime-local">
+      </div>
+      <div class="form-group">
+        <label class="form-label">M. Other Pertinent Information <span>(MEDEVAC special equipment, site security, marking, patient status, terrain)</span></label>
+        <textarea class="form-textarea" placeholder="Hoist required? Site security? Marking method? Patient nationality/status? Terrain description?"></textarea>
+      </div>
+      <button class="reset-btn" onclick="resetForm()">&#8635; Clear Worksheet</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DUTIES PAGE ===== -->
+<div class="page" id="page-duties">
+  <div class="section">
+    <div class="section-title">Duties &amp; Responsibilities</div>
+    <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">Tap a role to expand checklist. Check off tasks as completed.</p>
+
+    <!-- Battle Captain -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">Battle Captain (S-3)</div><div class="role-sub">Initial response &amp; coordination</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Record/document information using Mishap Information Worksheet. Do not delay reporting.</span></li>
+        <li><input type="checkbox"><span>Ensure appropriate first responders are notified.</span></li>
+        <li><input type="checkbox"><span>Initiate separate staff journal (DA Form 1594) &mdash; log all events from time of notification.</span></li>
+        <li><input type="checkbox"><span>Ensure battle tracking; notify S-3 to formulate options ASAP.</span></li>
+        <li><input type="checkbox"><span>Re-direct aircraft/ground vehicles to incident as necessary.</span></li>
+        <li><input type="checkbox"><span>Coordinate Search and Rescue through USAREUR-AF if necessary.</span></li>
+        <li><input type="checkbox"><span>Monitor requests from crash site for special/additional equipment.</span></li>
+        <li><input type="checkbox"><span>Request EOD support through Base Ops if ordinance is onboard. AAHP: DSN 587-0770 / IAHP: DSN 587-0782.</span></li>
+        <li><input type="checkbox"><span>Coordinate with other units for aviation support as necessary.</span></li>
+        <li><input type="checkbox"><span>Notify 12th CAB Ops Center DSN: 314-587-0816 / CIV: 09641-705870817.</span></li>
+        <li><input type="checkbox"><span>Provide support to Accident Investigation Team. Coordinate aircraft support for AIB.</span></li>
+        <li><input type="checkbox"><span>Conduct After-Action Review at earliest convenience.</span></li>
+        <li><input type="checkbox"><span>Conduct and evaluate adequacy tests of the Pre-Accident Plan.</span></li>
+      </ul>
+    </div>
+
+    <!-- Commander -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">Commander</div><div class="role-sub">COL Bock &mdash; Overall control</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Responsible for overall control and coordination of accident response.</span></li>
+        <li><input type="checkbox"><span>Control, direct, coordinate, and dispatch primary crash alarm personnel, aircraft, equipment, and convoys to the accident site.</span></li>
+        <li><input type="checkbox"><span>Notify the 12th CAB Command Group if required.</span></li>
+        <li><input type="checkbox"><span>At discretion, temporarily ground all aircraft in Brigade if necessary. Resume ops as fuel/environmental/mechanical factors are ruled out.</span></li>
+        <li><input type="checkbox"><span>If fatality or injuries occur, execute actions IAW Casualty SOP.</span></li>
+        <li><input type="checkbox"><span>Discuss Flight Evaluation Board procedures with Standardization Officer and Safety Officer.</span></li>
+      </ul>
+    </div>
+
+    <!-- XO -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">XO</div><div class="role-sub">MAJ Grubbs &mdash; Plan execution</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>In absence of Commander, assume CDR duties.</span></li>
+        <li><input type="checkbox"><span>Supervise activation and execution of this plan to completion.</span></li>
+        <li><input type="checkbox"><span>Ensure Brigade Safety Officer has been notified.</span></li>
+        <li><input type="checkbox"><span>If severe injuries or fatality: ensure no unauthorized calls to next-of-kin.</span></li>
+        <li><input type="checkbox"><span>Notify HHC Commander and unit Motor Officer in event of AMV accident.</span></li>
+        <li><input type="checkbox"><span>Assume duties as CAB POC for the Battalion involved.</span></li>
+        <li><input type="checkbox"><span>Determine composition and notify Brigade Crisis Action Team (CAT): Flight Surgeon, S-3, BAMO/AMO, S-1, AMSO, S-4, PAO, Chaplain, S-2, S-6, Rear-Det CDR (tactical).</span></li>
+        <li><input type="checkbox"><span>Direct actions of Brigade CAT.</span></li>
+        <li><input type="checkbox"><span>Continually update Brigade Commander on mishap status.</span></li>
+        <li><input type="checkbox"><span>Monitor all reports to higher; coordinate actions with subordinates.</span></li>
+        <li><input type="checkbox"><span>Assist and coordinate with media and outside agencies.</span></li>
+        <li><input type="checkbox"><span>Coordinate all post-mishap actions.</span></li>
+      </ul>
+    </div>
+
+    <!-- Safety Officer -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">Safety Officer / NCO</div><div class="role-sub">CW4 Bowyer &mdash; Site &amp; investigation</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Ensure BDE CDR and DCO are notified.</span></li>
+        <li><input type="checkbox"><span>Ensure notification of V Corps Safety Director (with CAB CDR approval).</span></li>
+        <li><input type="checkbox"><span>For suspected Class A or B: proceed to crash site and assist BN safety personnel.</span></li>
+        <li><input type="checkbox"><span>At site: Take charge of mishap site, assist in security.</span></li>
+        <li><input type="checkbox"><span>Secure all personal effects, ALSE, logbooks, PPC, maps, and info for investigation.</span></li>
+        <li><input type="checkbox"><span>Identify witnesses and obtain all witness statements.</span></li>
+        <li><input type="checkbox"><span>Initiate accident investigation; assist accident board if designated.</span></li>
+        <li><input type="checkbox"><span>Take photographs/video of accident site.</span></li>
+        <li><input type="checkbox"><span>Diagram mishap site.</span></li>
+        <li><input type="checkbox"><span>Initiate Aviation Accident Report, Ground Accident Reports, or Initial Notification.</span></li>
+        <li><input type="checkbox"><span>Make assessment of aircraft/AMV accident classification after AMO/SMO estimate.</span></li>
+        <li><input type="checkbox"><span>Keep CDR, CSM, XO, and S-3 updated.</span></li>
+        <li><input type="checkbox"><span>Contact V Corps Safety Office for AIB orders. DSN: 314-538-8778 / Cell: 502-936-2403.</span></li>
+        <li><input type="checkbox"><span>Be prepared to participate as board member; recommend nominees to BN CDR.</span></li>
+        <li><input type="checkbox"><span>Ensure equipment removed by accident board is accounted for by Property Book action.</span></li>
+        <li><input type="checkbox"><span>Obtain Release of Interest memos from both investigating boards upon completion.</span></li>
+        <li><input type="checkbox"><span>Review this plan quarterly; ensure participating agencies test at least quarterly.</span></li>
+        <li><input type="checkbox"><span>Review accident reports before forwarding to reviewing authority.</span></li>
+      </ul>
+    </div>
+
+    <!-- S-1 -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">S-1</div><div class="role-sub">CPT Hafen &mdash; Personnel &amp; casualty</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Obtain DD Form 93/SGLI, 201 field files, and photos for all crewmembers involved. Ensure casualty reports are filed.</span></li>
+        <li><input type="checkbox"><span>Coordinate personnel administration functions.</span></li>
+        <li><input type="checkbox"><span>Assist CDR in preparing letter of condolence and/or sympathy.</span></li>
+        <li><input type="checkbox"><span>Coordinate with PAO (314-587-0778) to prepare generic incident summary for V Corps PAO press release.</span></li>
+        <li><input type="checkbox"><span>Inform G-1/AG Casualty Section upon confirmation of casualties. Complete lines 31–43 of Casualty Report (AR 600-8-1, Ch. 3).</span></li>
+        <li><input type="checkbox"><span>Only after final G-1/AG coordination: implement Death/Injury Notification Plan. Contact Casualty Section one final time.</span></li>
+        <li><input type="checkbox"><span>Admin actions (promotions, awards, applicable actions).</span></li>
+      </ul>
+    </div>
+
+    <!-- S-2 -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">S-2</div><div class="role-sub">CPT Grant &mdash; Intel &amp; security</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Check location for nearest threat; assess weather in area.</span></li>
+        <li><input type="checkbox"><span>Coordinate with AMSO to submit SARIR with ISOPREP and EPA data for each survivor and survival equipment type.</span></li>
+        <li><input type="checkbox"><span>Determine presence of classified documents/material/equipment on mishap aircraft and arrange security/recovery.</span></li>
+        <li><input type="checkbox"><span>Coordinate with Military Police and local authorities if assistance needed.</span></li>
+        <li><input type="checkbox"><span>Coordinate courier orders when required.</span></li>
+        <li><input type="checkbox"><span>Provide terrain analysis (site, route to site, weather effects).</span></li>
+        <li><input type="checkbox"><span>Provide imagery (GEOINT).</span></li>
+        <li><input type="checkbox"><span>Provide 1:50,000 scale maps with best route to accident site.</span></li>
+      </ul>
+    </div>
+
+    <!-- S-6 -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">S-6</div><div class="role-sub">MAJ Burchett &mdash; Communications</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Be prepared to support accident investigation board with technology and communications needs (FAX, worldwide DSN, NIPR computer, printer).</span></li>
+      </ul>
+    </div>
+
+    <!-- Flight Surgeon -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">BDE Flight Surgeon</div><div class="role-sub">MAJ Jones / MAJ Canipe &mdash; Medical</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Be prepared to proceed to crash site, CSH/Hospital, or staging area per CDR guidance.</span></li>
+        <li><input type="checkbox"><span>Ensure all FS assigned to 12th CAB know to conduct or be present for toxicology specimen draw if unit member involved.</span></li>
+        <li><input type="checkbox"><span>Determine number, positions, and identities of personnel/casualties.</span></li>
+        <li><input type="checkbox"><span><strong>Crash Site:</strong> Secure Accident Investigation Handbook, Aircraft Mishap Kit, and trauma rucksack.</span></li>
+        <li><input type="checkbox"><span>Ensure safety of casualties; appropriate treatment, stabilization, and evacuation. Assign triage classifications if necessary.</span></li>
+        <li><input type="checkbox"><span>Ensure accident site disturbed as little as possible. Mark final resting position of each casualty. Act as site release authority for body removal.</span></li>
+        <li><input type="checkbox"><span><strong>Emergency Room:</strong> Ensure toxicology specimen collection from surviving crew. Coordinate with AFIP, US Army Aeromedical Research Lab, USACR/SC, and Pathology.</span></li>
+        <li><input type="checkbox"><span>Conduct post-mishap physical examinations of surviving crew; issue DA Form 2992.</span></li>
+        <li><input type="checkbox"><span>If fatalities: contact pathologist on call for autopsy coordination and site visit.</span></li>
+        <li><input type="checkbox"><span>Secure medical and dental records.</span></li>
+        <li><input type="checkbox"><span>Secure flight equipment of survivors and deceased. Do NOT remove helmet/flight equipment prior to autopsy.</span></li>
+        <li><input type="checkbox"><span>Attend autopsy; ensure appropriate specimen collection.</span></li>
+        <li><input type="checkbox"><span>Coordinate data handoff to flight surgeon on Aviation Accident Investigation Board.</span></li>
+        <li><input type="checkbox"><span><strong>Non-Injury Mishaps:</strong> Toxicology specimen collection from surviving crew. Coordinate with local FS/medical facility for access and results.</span></li>
+      </ul>
+    </div>
+
+    <!-- ASB Commander -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">ASB Commander</div><div class="role-sub">DART Team assembly &amp; dispatch</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Coordinate with owning company to assemble DART team: aviation maintenance officer, ASO, MDS-specific TI, mechanic, and any specialty needed. At least one combat lifesaver.</span></li>
+        <li><input type="checkbox"><span>Dispatch DART team to accident site ASAP.</span></li>
+        <li><input type="checkbox"><span>Brief DART team: consolidate at assembly point before departing for site.</span></li>
+        <li><input type="checkbox"><span>DART team assesses damage; provides Safety Officer initial ECOD for accident reporting.</span></li>
+        <li><input type="checkbox"><span>DART team obtains fuel and oil samples; submits for analysis. Provide results to AIB.</span></li>
+        <li><input type="checkbox"><span>DART team provides initial accident site security until owning unit arrives. Additional support through BN/BDE S3.</span></li>
+      </ul>
+    </div>
+
+    <!-- BAMO -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">BAMO</div><div class="role-sub">CW5 Everett &mdash; Maintenance</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Assist BN Maintenance Officer with securing aircraft historical records at flight operations. Records held by BN ASO.</span></li>
+        <li><input type="checkbox"><span>Assist in coordination for Maintenance Test Pilot if required.</span></li>
+        <li><input type="checkbox"><span>Be prepared to travel to mishap site with CAB ASO.</span></li>
+        <li><input type="checkbox"><span>Assign ECOD responsibility; assist ASO in determining accident classification.</span></li>
+        <li><input type="checkbox"><span>Coordinate for formal ECOD by TASM-G/TAMP.</span></li>
+        <li><input type="checkbox"><span>Assist BN AMO with aircraft recovery arrangements after release by ASO or AIB president.</span></li>
+        <li><input type="checkbox"><span>Assist BN AMO with preparation and submission of Request for Disposition.</span></li>
+      </ul>
+    </div>
+
+    <!-- Standardization Officer -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">Standardization Officer</div><div class="role-sub">CW5 Weisskopf &mdash; Records &amp; eval</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Collect and secure all aviation records of personnel involved and mission-related info in flight operations. Collect CAB SOPs, applicable ATM, FMs, etc.</span></li>
+        <li><input type="checkbox"><span>Be prepared to assist ASO and investigation board. Conduct post-accident flight evaluations as necessary.</span></li>
+        <li><input type="checkbox"><span>Prepare to brief BN Commander on Flight Evaluation Board proceedings (factual data, objective findings, independent of AIB and AR 15-6).</span></li>
+      </ul>
+    </div>
+
+    <!-- JAG -->
+    <div class="role-header" onclick="toggleRole(this)">
+      <div><div class="role-title">JAG Officer</div><div class="role-sub">MAJ Dombrosky &mdash; Legal</div></div>
+      <span class="role-chevron">&#8964;</span>
+    </div>
+    <div class="role-body">
+      <ul class="checklist">
+        <li><input type="checkbox"><span>Advise CDR on need for AR 15-6 investigation (death, total loss of Army aircraft, property loss &gt;$1M, loss of controlled inventory item).</span></li>
+        <li><input type="checkbox"><span>Draft appointment orders; provide legal advice to AR 15-6 investigation officer.</span></li>
+        <li><input type="checkbox"><span>Coordinate with USAREUR-AF regarding appointment of claims officer or foreign claims commission for potential claims against US Government.</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ===== REFERENCE PAGE ===== -->
+<div class="page" id="page-ref">
+  <div class="section">
+    <div class="ref-tabs">
+      <button class="ref-tab active" onclick="switchTab(this,'tab-a')">Tab A</button>
+      <button class="ref-tab" onclick="switchTab(this,'tab-b')">Tab B</button>
+      <button class="ref-tab" onclick="switchTab(this,'tab-c')">Tab C</button>
+      <button class="ref-tab" onclick="switchTab(this,'tab-d')">Tab D</button>
+      <button class="ref-tab" onclick="switchTab(this,'tab-e')">Tab E</button>
+    </div>
+
+    <!-- TAB A -->
+    <div class="ref-panel active" id="tab-a">
+      <div class="section-title">Tab A &mdash; Alarm Worksheet</div>
+
+      <div class="card" style="background: linear-gradient(135deg,#6B1B1B,#8B2020);border-color:#C0392B;">
+        <div class="card-header" style="color:#FFB3B3;">Primary Alarm</div>
+        <div class="contact-row">
+          <div class="contact-info">
+            <div class="contact-role">Tower/Base Ops &mdash; Ansbach (AAHP)</div>
+            <div class="contact-name">Freq: 138.55 / 376.97</div>
+            <div class="contact-phones">
+              <a class="call-btn" href="tel:3145870770"><span class="ph-type">DSN</span> 587-0770</a>
+              <a class="call-btn" href="tel:096417058700770"><span class="ph-type">CIV</span> 09641-70587-0770</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-info">
+            <div class="contact-role">Tower/Base Ops &mdash; Illesheim (IAHP)</div>
+            <div class="contact-name">Freq: 141.25 / 376.15</div>
+            <div class="contact-phones">
+              <a class="call-btn" href="tel:3145876503"><span class="ph-type">DSN</span> 587-6503</a>
+              <a class="call-btn" href="tel:096417058706503"><span class="ph-type">CIV</span> 09641-70587-6503</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-info">
+            <div class="contact-role">Crash Rescue / Fire</div>
+            <div class="contact-phones">
+              <a class="call-btn" href="tel:112"><span class="ph-type">EMER</span> 112</a>
+              <a class="call-btn" href="tel:098028 3112"><span class="ph-type">CIV</span> 09802-83-112</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-info">
+            <div class="contact-role">Hospital Ambulance</div>
+            <div class="contact-phones">
+              <a class="call-btn" href="tel:112"><span class="ph-type">EMER</span> 112</a>
+              <a class="call-btn" href="tel:0980283112"><span class="ph-type">CIV</span> 09802-83-112</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-info">
+            <div class="contact-role">Law Enforcement</div>
+            <div class="contact-name">Freq: 110</div>
+            <div class="contact-phones">
+              <a class="call-btn" href="tel:3145871110"><span class="ph-type">DSN</span> 587-1110</a>
+              <a class="call-btn" href="tel:0980283110"><span class="ph-type">CIV</span> 09802-83-110</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Secondary Alarm &mdash; Griffin Freqs</div>
+        <table class="data-table">
+          <thead><tr><th>Role / Name</th><th>Freq</th><th>Cell</th></tr></thead>
+          <tbody>
+            <tr><td>S-3 MAJ Barnes</td><td>Griffin 3</td><td><a href="tel:016097718116">0160 977-18116</a></td></tr>
+            <tr><td>CDR COL Bock</td><td>Griffin 6</td><td><a href="tel:01622572685">0162 257-2685</a></td></tr>
+            <tr><td>XO MAJ Grubbs</td><td>Griffin 5</td><td><a href="tel:01622676422">0162 267 6422</a></td></tr>
+            <tr><td>Safety CW4 Bowyer</td><td>Griffin 99</td><td><a href="tel:01721424817">0172 142-4817</a></td></tr>
+            <tr><td>S-1 CPT Hafen</td><td>Griffin 1</td><td><a href="tel:01622563391">0162 256-3391</a></td></tr>
+            <tr><td>S-2 CPT Grant</td><td>Griffin 2</td><td><a href="tel:7579414246">757-9414246</a></td></tr>
+            <tr><td>CSM CSM Anderson</td><td>Griffin 7</td><td><a href="tel:01622517057">0162 251-7057</a></td></tr>
+            <tr><td>BAMO CW5 Everett</td><td>Griffin 92</td><td><a href="tel:01622550236">0162 255-0236</a></td></tr>
+            <tr><td>Stands CW5 Weisskopf</td><td>Griffin 00</td><td><a href="tel:015224476649">0152 2447-6649</a></td></tr>
+            <tr><td>CWOB CW5 Hules</td><td>Griffin 8</td><td><a href="tel:01622965412">0162 296-5412</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB B -->
+    <div class="ref-panel" id="tab-b">
+      <div class="section-title">Tab B &mdash; Phone Numbers</div>
+      <div class="card">
+        <div class="card-header">Key Stations</div>
+        <table class="data-table">
+          <thead><tr><th>Station</th><th>DSN / Phone</th></tr></thead>
+          <tbody>
+            <tr><td>V Corps Safety</td><td><a href="tel:3129835504">312-983-5504</a></td></tr>
+            <tr><td>Katterbach Med Clinic</td><td><a href="tel:3145903600">314-590-3600</a></td></tr>
+            <tr><td>Katterbach Provost Marshal</td><td><a href="tel:3145871110">314-587-1110</a></td></tr>
+            <tr><td>12th CAB PAO</td><td><a href="tel:3145870778">314-587-0778</a></td></tr>
+            <tr><td>Garrison Safety</td><td><a href="tel:3145871571">314-587-1571</a></td></tr>
+            <tr><td>Armed Forces Med Examiner</td><td><a href="tel:2024096811">202-409-6811</a></td></tr>
+            <tr><td>AFMES Toxicology</td><td><a href="tel:3023468648">302-346-8648</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Local Hospitals (R3 Equivalent)</div>
+        <div class="hospital-row">
+          <div class="hospital-name">Ansbach Klinikum</div>
+          <div class="hospital-meta">Ansbach &mdash; HN R3 Equivalent</div>
+          <div class="hospital-phone"><a class="call-btn" href="tel:+4998140"><span class="ph-type">PHONE</span> +49 981 4840</a></div>
+        </div>
+        <div class="hospital-row">
+          <div class="hospital-name">St. Josef Hospital</div>
+          <div class="hospital-meta">Wiesbaden &mdash; HN R3 Equivalent</div>
+          <div class="hospital-phone"><a class="call-btn" href="tel:+4906111770"><span class="ph-type">PHONE</span> +49 0611 1770</a></div>
+        </div>
+        <div class="hospital-row">
+          <div class="hospital-name">Klinikum Weiden</div>
+          <div class="hospital-meta">Grafenwohr &mdash; HN R3 Equivalent</div>
+          <div class="hospital-phone"><a class="call-btn" href="tel:+4909613030"><span class="ph-type">PHONE</span> +49 0961 3030</a></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Definitive Care / Trauma</div>
+        <div class="hospital-row">
+          <div class="hospital-name">Landstuhl Regional Medical Center</div>
+          <div class="hospital-meta">R4 Definitive Care</div>
+          <div class="hospital-phone"><a class="call-btn" href="tel:+4906371946463211"><span class="ph-type">PHONE</span> +49 06371 94646321</a></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Armed Forces Medical Examiner (Fatality / Toxicology)</div>
+        <div style="font-size:13px;line-height:1.7;color:var(--text-dim);">
+          <div><strong style="color:var(--text);">Report Fatality:</strong> <a href="tel:2024096811" style="color:var(--gold-light);">202-409-6811</a></div>
+          <div><strong style="color:var(--text);">Toxicology:</strong> <a href="tel:3023468648" style="color:var(--gold-light);">302-346-8648</a> (DSN: 366-8648)</div>
+          <div><strong style="color:var(--text);">Fax:</strong> 302-346-8819</div>
+          <div><strong style="color:var(--text);">Email:</strong> dha.dover.afmes.mbx.information@health.mil</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB C: MEDEVAC -->
+    <div class="ref-panel" id="tab-c">
+      <div class="section-title">Tab C &mdash; MEDEVAC Request (9-Line)</div>
+      <div class="alert-banner" style="background:#1E3A5F;border:1px solid var(--gold);">Freq: Request MEDEVAC on unit tactical freq or 121.5 MHz (Guard)</div>
+      <div class="card">
+        <div class="medevac-line">
+          <div class="line-num">1</div>
+          <div class="line-content">
+            <div class="line-title">Location of Pickup Site</div>
+            <div class="line-detail">Grid coordinates or lat/long of pickup site</div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">2</div>
+          <div class="line-content">
+            <div class="line-title">Radio Frequency, Call Sign, Suffix</div>
+            <div class="line-detail">Freq to contact at pickup site &mdash; Call sign &amp; suffix</div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">3</div>
+          <div class="line-content">
+            <div class="line-title">Number of Patients by Precedence</div>
+            <div class="line-detail">
+              <strong>A</strong> &mdash; Urgent (2 hrs) &nbsp;|&nbsp; <strong>B</strong> &mdash; Urgent Surgical (2 hrs, needs surgery)<br>
+              <strong>C</strong> &mdash; Priority (4 hrs) &nbsp;|&nbsp; <strong>D</strong> &mdash; Routine (24 hrs)<br>
+              <strong>E</strong> &mdash; Convenience
+            </div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">4</div>
+          <div class="line-content">
+            <div class="line-title">Special Equipment Required</div>
+            <div class="line-detail"><strong>A</strong> &mdash; None &nbsp;|&nbsp; <strong>B</strong> &mdash; Hoist &nbsp;|&nbsp; <strong>C</strong> &mdash; Extraction equip &nbsp;|&nbsp; <strong>D</strong> &mdash; Ventilator</div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">5</div>
+          <div class="line-content">
+            <div class="line-title">Number of Patients by Type</div>
+            <div class="line-detail"><strong>L</strong> &mdash; Litter &nbsp;|&nbsp; <strong>A</strong> &mdash; Ambulatory</div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">6</div>
+          <div class="line-content">
+            <div class="line-title">Security of Pickup Zone</div>
+            <div class="line-detail">
+              <strong>N</strong> &mdash; No enemy &nbsp;|&nbsp; <strong>P</strong> &mdash; Possible enemy<br>
+              <strong>E</strong> &mdash; Enemy in area &nbsp;|&nbsp; <strong>X</strong> &mdash; Enemy &mdash; escort required
+            </div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">7</div>
+          <div class="line-content">
+            <div class="line-title">Method of Marking Pickup Zone</div>
+            <div class="line-detail">
+              <strong>A</strong> &mdash; Panels &nbsp;|&nbsp; <strong>B</strong> &mdash; Pyrotechnic signal<br>
+              <strong>C</strong> &mdash; Smoke signal &nbsp;|&nbsp; <strong>D</strong> &mdash; None &nbsp;|&nbsp; <strong>E</strong> &mdash; Other
+            </div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">8</div>
+          <div class="line-content">
+            <div class="line-title">Patient Nationality &amp; Status</div>
+            <div class="line-detail">
+              <strong>A</strong> &mdash; US Military &nbsp;|&nbsp; <strong>B</strong> &mdash; US Civilian<br>
+              <strong>C</strong> &mdash; Non-US Military &nbsp;|&nbsp; <strong>D</strong> &mdash; Non-US Civilian &nbsp;|&nbsp; <strong>E</strong> &mdash; EPW
+            </div>
+          </div>
+        </div>
+        <div class="medevac-line">
+          <div class="line-num">9</div>
+          <div class="line-content">
+            <div class="line-title">NBC Contamination</div>
+            <div class="line-detail"><strong>N</strong> &mdash; None &nbsp;|&nbsp; <strong>B</strong> &mdash; Biological &nbsp;|&nbsp; <strong>C</strong> &mdash; Chemical &nbsp;|&nbsp; <strong>R</strong> &mdash; Radiological</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="font-size:12px;color:var(--text-dim);">
+        Other pertinent info: special equipment MEDEVAC will need (hoist, etc.), security of pickup site, method of marking, patient nationality and status, terrain description.
+      </div>
+    </div>
+
+    <!-- TAB D: OVERDUE AIRCRAFT -->
+    <div class="ref-panel" id="tab-d">
+      <div class="section-title">Tab D &mdash; PL &amp; Overdue Aircraft</div>
+      <div class="card" style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">
+        A Precautionary Landing (PL) or overdue aircraft may indicate a Fallen Angel. Initiate immediately.
+      </div>
+
+      <div class="card">
+        <div class="card-header">Precautionary Landing Procedures</div>
+        <div class="overdue-step">
+          <div class="step-circle">1</div>
+          <div class="step-text">Attempt radio contact with aircraft on all available frequencies (tactical, guard 121.5 MHz, UHF/VHF).</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">2</div>
+          <div class="step-text">Contact Tower/Base Ops for all airports/airfields along route of flight. AAHP: 314-587-0770 | IAHP: 314-587-6503.</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">3</div>
+          <div class="step-text">Initiate Primary Crash Alarm. Notify Battle CPT (314-587-0774).</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">4</div>
+          <div class="step-text">Notify CDR and key personnel per Secondary Alarm sequence.</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">5</div>
+          <div class="step-text">Determine last known position (LKP), time, altitude, fuel state, and heading from flight plan and crew brief info.</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">6</div>
+          <div class="step-text">Coordinate Search and Rescue (SAR) operations through USAREUR-AF if needed.</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">7</div>
+          <div class="step-text">Be prepared to dispatch SAR aircraft. Ensure crew has survival equipment, maps, and comms.</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">8</div>
+          <div class="step-text">S-2 conducts terrain analysis and provides best route to LKP/probable crash site.</div>
+        </div>
+        <div class="overdue-step">
+          <div class="step-circle">9</div>
+          <div class="step-text">Log all actions on DA Form 1594 from time aircraft declared overdue.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Fallen Angel Declaration</div>
+        <div style="font-size:14px;line-height:1.6;color:var(--text-dim);">
+          An aircraft is considered <strong style="color:var(--text);">overdue</strong> when it fails to arrive within <strong style="color:#F0B429;">30 minutes</strong> of ETA without contact.<br><br>
+          Declare <strong style="color:#C0392B;">FALLEN ANGEL</strong> and initiate full pre-mishap plan when aircraft is confirmed missing or crashed.
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB E: ACCIDENT MASTER CHECKLIST -->
+    <div class="ref-panel" id="tab-e">
+      <div class="section-title">Tab E &mdash; Accident Master Checklist</div>
+      <p style="font-size:13px;color:var(--text-dim);margin-bottom:14px;">BOC/Battle Captain immediate actions upon notification.</p>
+
+      <div class="card">
+        <div class="card-header">Immediate Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Record time of notification in DA Form 1594.</span></li>
+          <li><input type="checkbox"><span>Complete Mishap Information Worksheet (as much as possible).</span></li>
+          <li><input type="checkbox"><span>Call emergency services if not already done (Fire/Rescue: 112, Law Enforcement: 110).</span></li>
+          <li><input type="checkbox"><span>Call Primary Crash Alarm: Battle CPT/NCO DSN 314-587-0774.</span></li>
+          <li><input type="checkbox"><span>Initiate Secondary Alarm notification sequence (see Contacts page).</span></li>
+          <li><input type="checkbox"><span>Do NOT abandon primary phone. Minimize use to keep line open.</span></li>
+          <li><input type="checkbox"><span>Do NOT discuss accident with anyone not on notification list.</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Follow-On Actions</div>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Ensure BOC tracking map/board updated with aircraft/incident location.</span></li>
+          <li><input type="checkbox"><span>Request EOD if ordnance onboard (AAHP Base Ops: 314-587-0770).</span></li>
+          <li><input type="checkbox"><span>Coordinate SAR aircraft as needed through S-3.</span></li>
+          <li><input type="checkbox"><span>Ensure DART team dispatched from ASB.</span></li>
+          <li><input type="checkbox"><span>Ensure Flight Surgeon / PA en route to crash site or hospital.</span></li>
+          <li><input type="checkbox"><span>Ensure S-2 conducting threat assessment and terrain analysis.</span></li>
+          <li><input type="checkbox"><span>Ensure S-1 obtaining personnel records for all crew/pax involved.</span></li>
+          <li><input type="checkbox"><span>Ensure S-6 standing up communications support for AIB.</span></li>
+          <li><input type="checkbox"><span>Monitor all reports; update DA Form 1594 continuously.</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Items to Collect for Safety Investigation Team</div>
+        <ul class="checklist">
+          <li><input type="checkbox"><span>Aircraft logbook and historical records</span></li>
+          <li><input type="checkbox"><span>DA Form 2408-12 (Aircraft Status Log)</span></li>
+          <li><input type="checkbox"><span>DA Form 2408-13 (Aircraft Inspection and Maintenance Record)</span></li>
+          <li><input type="checkbox"><span>Crew flight records / Individual Flight Records</span></li>
+          <li><input type="checkbox"><span>Aircrew ALSE (Aviation Life Support Equipment)</span></li>
+          <li><input type="checkbox"><span>Helmets and personal flight equipment (do NOT remove before autopsy if fatality)</span></li>
+          <li><input type="checkbox"><span>Maps and flight planning materials used for the mission</span></li>
+          <li><input type="checkbox"><span>Applicable SOPs, ATM, FMs referenced for maneuvers being conducted</span></li>
+          <li><input type="checkbox"><span>Weather data for time/location of mishap</span></li>
+          <li><input type="checkbox"><span>ATC recordings and transcripts if available</span></li>
+          <li><input type="checkbox"><span>Witness statements (all witnesses)</span></li>
+          <li><input type="checkbox"><span>Photographs/video of accident site</span></li>
+          <li><input type="checkbox"><span>Fuel and oil samples from surviving components</span></li>
+          <li><input type="checkbox"><span>ISOPREP data for all crew</span></li>
+          <li><input type="checkbox"><span>Medical and dental records</span></li>
+          <li><input type="checkbox"><span>Toxicology specimens from surviving crew</span></li>
+          <li><input type="checkbox"><span>Mission brief/flight brief documentation</span></li>
+          <li><input type="checkbox"><span>Any classified documents/equipment from mishap aircraft</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end #content -->
+
+<!-- BOTTOM NAV -->
+<nav id="nav">
+  <button class="nav-btn active" onclick="showPage('home',this)">
+    <span class="icon">&#127968;</span>Home
+  </button>
+  <button class="nav-btn" onclick="showPage('contacts',this)">
+    <span class="icon">&#128222;</span>Contacts
+  </button>
+  <button class="nav-btn" onclick="showPage('worksheet',this)">
+    <span class="icon">&#128203;</span>Worksheet
+  </button>
+  <button class="nav-btn" onclick="showPage('duties',this)">
+    <span class="icon">&#9989;</span>Duties
+  </button>
+  <button class="nav-btn" onclick="showPage('ref',this)">
+    <span class="icon">&#128209;</span>Tabs
+  </button>
+</nav>
+
+<script>
+function showPage(name, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('content').scrollTop = 0;
+}
+
+function toggleRole(header) {
+  const body = header.nextElementSibling;
+  header.classList.toggle('open');
+  body.classList.toggle('open');
+}
+
+function switchTab(btn, panelId) {
+  document.querySelectorAll('.ref-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.ref-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(panelId).classList.add('active');
+}
+
+function toggle(btn, val) {
+  const row = btn.closest('.toggle-row');
+  row.querySelectorAll('.toggle-btn').forEach(b => { b.classList.remove('sel'); });
+  btn.classList.add('sel');
+}
+
+function resetForm() {
+  if (!confirm('Clear all worksheet entries?')) return;
+  document.querySelectorAll('#worksheet-form input, #worksheet-form textarea').forEach(el => el.value = '');
+  document.querySelectorAll('#worksheet-form .toggle-btn').forEach(b => b.classList.remove('sel'));
+}
+</script>
+</body>
+</html>
