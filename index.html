@@ -49,8 +49,8 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 }
 .nav-btn {
   flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 6px 2px; cursor: pointer; border: none; background: transparent;
-  color: var(--text-dim); font-size: 10px; font-weight: 600; letter-spacing: 0.3px;
+  padding: 6px 1px; cursor: pointer; border: none; background: transparent;
+  color: var(--text-dim); font-size: 9px; font-weight: 600; letter-spacing: 0.3px;
   text-transform: uppercase; min-height: 58px; transition: color 0.2s;
 }
 .nav-btn .icon { font-size: 20px; margin-bottom: 2px; }
@@ -905,13 +905,101 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
   </div>
 </div>
 
+<!-- ===== MEDEVAC PAGE ===== -->
+<div class="page" id="page-medevac">
+  <div class="section">
+    <div class="section-title">Tab C &mdash; MEDEVAC Request (9-Line)</div>
+    <div class="alert-banner" style="background:#1E3A5F;border:1px solid var(--gold);">Request MEDEVAC on unit tactical freq or 121.5 MHz (Guard)</div>
+    <div class="card">
+      <div class="medevac-line">
+        <div class="line-num">1</div>
+        <div class="line-content">
+          <div class="line-title">Location of Pickup Site</div>
+          <div class="line-detail">Grid coordinates or lat/long of pickup site</div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">2</div>
+        <div class="line-content">
+          <div class="line-title">Radio Frequency, Call Sign, Suffix</div>
+          <div class="line-detail">Freq to contact at pickup site &mdash; Call sign &amp; suffix</div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">3</div>
+        <div class="line-content">
+          <div class="line-title">Number of Patients by Precedence</div>
+          <div class="line-detail">
+            <strong>A</strong> &mdash; Urgent (2 hrs) &nbsp;|&nbsp; <strong>B</strong> &mdash; Urgent Surgical (2 hrs, surgery needed)<br>
+            <strong>C</strong> &mdash; Priority (4 hrs) &nbsp;|&nbsp; <strong>D</strong> &mdash; Routine (24 hrs)<br>
+            <strong>E</strong> &mdash; Convenience
+          </div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">4</div>
+        <div class="line-content">
+          <div class="line-title">Special Equipment Required</div>
+          <div class="line-detail"><strong>A</strong> &mdash; None &nbsp;|&nbsp; <strong>B</strong> &mdash; Hoist &nbsp;|&nbsp; <strong>C</strong> &mdash; Extraction equip &nbsp;|&nbsp; <strong>D</strong> &mdash; Ventilator</div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">5</div>
+        <div class="line-content">
+          <div class="line-title">Number of Patients by Type</div>
+          <div class="line-detail"><strong>L</strong> &mdash; Litter &nbsp;|&nbsp; <strong>A</strong> &mdash; Ambulatory</div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">6</div>
+        <div class="line-content">
+          <div class="line-title">Security of Pickup Zone</div>
+          <div class="line-detail">
+            <strong>N</strong> &mdash; No enemy &nbsp;|&nbsp; <strong>P</strong> &mdash; Possible enemy<br>
+            <strong>E</strong> &mdash; Enemy in area &nbsp;|&nbsp; <strong>X</strong> &mdash; Enemy &mdash; armed escort required
+          </div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">7</div>
+        <div class="line-content">
+          <div class="line-title">Method of Marking Pickup Zone</div>
+          <div class="line-detail">
+            <strong>A</strong> &mdash; Panels &nbsp;|&nbsp; <strong>B</strong> &mdash; Pyrotechnic signal<br>
+            <strong>C</strong> &mdash; Smoke signal &nbsp;|&nbsp; <strong>D</strong> &mdash; None &nbsp;|&nbsp; <strong>E</strong> &mdash; Other
+          </div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">8</div>
+        <div class="line-content">
+          <div class="line-title">Patient Nationality &amp; Status</div>
+          <div class="line-detail">
+            <strong>A</strong> &mdash; US Military &nbsp;|&nbsp; <strong>B</strong> &mdash; US Civilian<br>
+            <strong>C</strong> &mdash; Non-US Military &nbsp;|&nbsp; <strong>D</strong> &mdash; Non-US Civilian &nbsp;|&nbsp; <strong>E</strong> &mdash; EPW
+          </div>
+        </div>
+      </div>
+      <div class="medevac-line">
+        <div class="line-num">9</div>
+        <div class="line-content">
+          <div class="line-title">NBC Contamination</div>
+          <div class="line-detail"><strong>N</strong> &mdash; None &nbsp;|&nbsp; <strong>B</strong> &mdash; Biological &nbsp;|&nbsp; <strong>C</strong> &mdash; Chemical &nbsp;|&nbsp; <strong>R</strong> &mdash; Radiological</div>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="font-size:12px;color:var(--text-dim);">
+      Other pertinent info: special equipment MEDEVAC will need (hoist, etc.), security of pickup site, method of marking, patient nationality and status, terrain description.
+    </div>
+  </div>
+</div>
+
 <!-- ===== REFERENCE PAGE ===== -->
 <div class="page" id="page-ref">
   <div class="section">
     <div class="ref-tabs">
       <button class="ref-tab active" onclick="switchTab(this,'tab-a')">Tab A</button>
       <button class="ref-tab" onclick="switchTab(this,'tab-b')">Tab B</button>
-      <button class="ref-tab" onclick="switchTab(this,'tab-c')">Tab C</button>
       <button class="ref-tab" onclick="switchTab(this,'tab-d')">Tab D</button>
       <button class="ref-tab" onclick="switchTab(this,'tab-e')">Tab E</button>
     </div>
@@ -1050,93 +1138,6 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
       </div>
     </div>
 
-    <!-- TAB C: MEDEVAC -->
-    <div class="ref-panel" id="tab-c">
-      <div class="section-title">Tab C &mdash; MEDEVAC Request (9-Line)</div>
-      <div class="alert-banner" style="background:#1E3A5F;border:1px solid var(--gold);">Freq: Request MEDEVAC on unit tactical freq or 121.5 MHz (Guard)</div>
-      <div class="card">
-        <div class="medevac-line">
-          <div class="line-num">1</div>
-          <div class="line-content">
-            <div class="line-title">Location of Pickup Site</div>
-            <div class="line-detail">Grid coordinates or lat/long of pickup site</div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">2</div>
-          <div class="line-content">
-            <div class="line-title">Radio Frequency, Call Sign, Suffix</div>
-            <div class="line-detail">Freq to contact at pickup site &mdash; Call sign &amp; suffix</div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">3</div>
-          <div class="line-content">
-            <div class="line-title">Number of Patients by Precedence</div>
-            <div class="line-detail">
-              <strong>A</strong> &mdash; Urgent (2 hrs) &nbsp;|&nbsp; <strong>B</strong> &mdash; Urgent Surgical (2 hrs, needs surgery)<br>
-              <strong>C</strong> &mdash; Priority (4 hrs) &nbsp;|&nbsp; <strong>D</strong> &mdash; Routine (24 hrs)<br>
-              <strong>E</strong> &mdash; Convenience
-            </div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">4</div>
-          <div class="line-content">
-            <div class="line-title">Special Equipment Required</div>
-            <div class="line-detail"><strong>A</strong> &mdash; None &nbsp;|&nbsp; <strong>B</strong> &mdash; Hoist &nbsp;|&nbsp; <strong>C</strong> &mdash; Extraction equip &nbsp;|&nbsp; <strong>D</strong> &mdash; Ventilator</div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">5</div>
-          <div class="line-content">
-            <div class="line-title">Number of Patients by Type</div>
-            <div class="line-detail"><strong>L</strong> &mdash; Litter &nbsp;|&nbsp; <strong>A</strong> &mdash; Ambulatory</div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">6</div>
-          <div class="line-content">
-            <div class="line-title">Security of Pickup Zone</div>
-            <div class="line-detail">
-              <strong>N</strong> &mdash; No enemy &nbsp;|&nbsp; <strong>P</strong> &mdash; Possible enemy<br>
-              <strong>E</strong> &mdash; Enemy in area &nbsp;|&nbsp; <strong>X</strong> &mdash; Enemy &mdash; escort required
-            </div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">7</div>
-          <div class="line-content">
-            <div class="line-title">Method of Marking Pickup Zone</div>
-            <div class="line-detail">
-              <strong>A</strong> &mdash; Panels &nbsp;|&nbsp; <strong>B</strong> &mdash; Pyrotechnic signal<br>
-              <strong>C</strong> &mdash; Smoke signal &nbsp;|&nbsp; <strong>D</strong> &mdash; None &nbsp;|&nbsp; <strong>E</strong> &mdash; Other
-            </div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">8</div>
-          <div class="line-content">
-            <div class="line-title">Patient Nationality &amp; Status</div>
-            <div class="line-detail">
-              <strong>A</strong> &mdash; US Military &nbsp;|&nbsp; <strong>B</strong> &mdash; US Civilian<br>
-              <strong>C</strong> &mdash; Non-US Military &nbsp;|&nbsp; <strong>D</strong> &mdash; Non-US Civilian &nbsp;|&nbsp; <strong>E</strong> &mdash; EPW
-            </div>
-          </div>
-        </div>
-        <div class="medevac-line">
-          <div class="line-num">9</div>
-          <div class="line-content">
-            <div class="line-title">NBC Contamination</div>
-            <div class="line-detail"><strong>N</strong> &mdash; None &nbsp;|&nbsp; <strong>B</strong> &mdash; Biological &nbsp;|&nbsp; <strong>C</strong> &mdash; Chemical &nbsp;|&nbsp; <strong>R</strong> &mdash; Radiological</div>
-          </div>
-        </div>
-      </div>
-      <div class="card" style="font-size:12px;color:var(--text-dim);">
-        Other pertinent info: special equipment MEDEVAC will need (hoist, etc.), security of pickup site, method of marking, patient nationality and status, terrain description.
-      </div>
-    </div>
-
     <!-- TAB D: OVERDUE AIRCRAFT -->
     <div class="ref-panel" id="tab-d">
       <div class="section-title">Tab D &mdash; PL &amp; Overdue Aircraft</div>
@@ -1269,6 +1270,9 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
   </button>
   <button class="nav-btn" onclick="showPage('duties',this)">
     <span class="icon">&#9989;</span>Duties
+  </button>
+  <button class="nav-btn" onclick="showPage('medevac',this)">
+    <span class="icon">&#128681;</span>MEDEVAC
   </button>
   <button class="nav-btn" onclick="showPage('ref',this)">
     <span class="icon">&#128209;</span>Tabs
