@@ -92,6 +92,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 .contact-row:last-child { border-bottom: none; }
 .contact-info { flex: 1; }
 .contact-role { font-size: 11px; font-weight: 700; color: var(--gold-light); text-transform: uppercase; letter-spacing: 0.5px; }
+.callsign { background: rgba(201,148,10,0.15); border: 1px solid var(--gold); border-radius: 4px; padding: 1px 5px; font-size: 10px; color: var(--gold-light); text-transform: none; letter-spacing: 0; vertical-align: middle; }
 .contact-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .contact-phones { display: flex; gap: 8px; margin-top: 4px; }
 .call-btn {
@@ -308,12 +309,63 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
     <div class="section-title">Step 2 &mdash; Notify In Order</div>
     <div class="alert-banner">DO NOT discuss accident details with anyone not on this list</div>
 
+    <div class="card" style="background:linear-gradient(135deg,#6B1B1B,#8B2020);border-color:#C0392B;">
+      <div class="card-header" style="color:#FFB3B3;">Primary Alarm &mdash; Call First</div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Tower / Base Ops &mdash; Ansbach (AAHP)</div>
+          <div class="contact-name">Freq: 138.55 / 376.97</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:+499802830770"><span class="ph-type">DSN</span> 587-0770</a>
+            <a class="call-btn" href="tel:096417058700770"><span class="ph-type">CIV</span> 09641-70587-0770</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Tower / Base Ops &mdash; Illesheim (IAHP)</div>
+          <div class="contact-name">Freq: 141.25 / 376.15</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:+499802836503"><span class="ph-type">DSN</span> 587-6503</a>
+            <a class="call-btn" href="tel:096417058706503"><span class="ph-type">CIV</span> 09641-70587-6503</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Crash Rescue / Fire</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:112"><span class="ph-type">EMER</span> 112</a>
+            <a class="call-btn" href="tel:0980283112"><span class="ph-type">CIV</span> 09802-83-112</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Hospital Ambulance</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:112"><span class="ph-type">EMER</span> 112</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Law Enforcement</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:110"><span class="ph-type">EMER</span> 110</a>
+            <a class="call-btn" href="tel:+499802831110"><span class="ph-type">DSN</span> 587-1110</a>
+            <a class="call-btn" href="tel:0980283110"><span class="ph-type">CIV</span> 09802-83-110</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-header">CAB Secondary Alarm &mdash; Notify After Emergency Services</div>
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">S-3</div>
+          <div class="contact-role">S-3 &nbsp;<span class="callsign">Griffin 3</span></div>
           <div class="contact-name">MAJ Barnes</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830711"><span class="ph-type">DSN</span> 587-0711</a>
@@ -335,7 +387,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">Commander</div>
+          <div class="contact-role">Commander &nbsp;<span class="callsign">Griffin 6</span></div>
           <div class="contact-name">COL Bock</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830701"><span class="ph-type">DSN</span> 587-0701</a>
@@ -356,7 +408,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">XO</div>
+          <div class="contact-role">XO &nbsp;<span class="callsign">Griffin 5</span></div>
           <div class="contact-name">MAJ Grubbs</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830704"><span class="ph-type">DSN</span> 587-0704</a>
@@ -378,7 +430,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">ASO (Safety)</div>
+          <div class="contact-role">ASO (Safety) &nbsp;<span class="callsign">Griffin 99</span></div>
           <div class="contact-name">CW4 Bowyer</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830774"><span class="ph-type">DSN</span> 587-0774</a>
@@ -389,7 +441,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">S-1</div>
+          <div class="contact-role">S-1 &nbsp;<span class="callsign">Griffin 1</span></div>
           <div class="contact-name">CPT Hafen</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830709"><span class="ph-type">DSN</span> 587-0709</a>
@@ -400,7 +452,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">S-2</div>
+          <div class="contact-role">S-2 &nbsp;<span class="callsign">Griffin 2</span></div>
           <div class="contact-name">CPT Grant</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830710"><span class="ph-type">DSN</span> 587-0710</a>
@@ -433,7 +485,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">CSM</div>
+          <div class="contact-role">CSM &nbsp;<span class="callsign">Griffin 7</span></div>
           <div class="contact-name">CSM Anderson</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830705"><span class="ph-type">DSN</span> 587-0705</a>
@@ -455,7 +507,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">BAMO</div>
+          <div class="contact-role">BAMO &nbsp;<span class="callsign">Griffin 92</span></div>
           <div class="contact-name">CW5 Everett</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830785"><span class="ph-type">DSN</span> 587-0785</a>
@@ -466,7 +518,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">Standardization Officer</div>
+          <div class="contact-role">Standardization Officer &nbsp;<span class="callsign">Griffin 00</span></div>
           <div class="contact-name">CW5 Weisskopf</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830773"><span class="ph-type">DSN</span> 587-0773</a>
@@ -477,7 +529,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 
       <div class="contact-row">
         <div class="contact-info">
-          <div class="contact-role">CWOB</div>
+          <div class="contact-role">CWOB &nbsp;<span class="callsign">Griffin 8</span></div>
           <div class="contact-name">CW5 Hules</div>
           <div class="contact-phones">
             <a class="call-btn" href="tel:+499802830706"><span class="ph-type">DSN</span> 587-0706</a>
@@ -603,6 +655,54 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
             <a class="call-btn" href="tel:096417058706503"><span class="ph-type">CIV</span> 09641-705870782</a>
           </div>
         </div>
+      </div>
+      <div class="contact-row">
+        <div class="contact-info">
+          <div class="contact-role">Garrison Safety</div>
+          <div class="contact-name">&mdash;</div>
+          <div class="contact-phones">
+            <a class="call-btn" href="tel:+499802831571"><span class="ph-type">DSN</span> 587-1571</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">Medical Facilities</div>
+    <div class="card">
+      <div class="card-header">Local Hospitals (R3 Equivalent)</div>
+      <div class="hospital-row">
+        <div class="hospital-name">Ansbach Klinikum</div>
+        <div class="hospital-meta">Ansbach &mdash; HN R3 Equivalent</div>
+        <div class="hospital-phone"><a class="call-btn" href="tel:+4998140"><span class="ph-type">PHONE</span> +49 981 4840</a></div>
+      </div>
+      <div class="hospital-row">
+        <div class="hospital-name">St. Josef Hospital</div>
+        <div class="hospital-meta">Wiesbaden &mdash; HN R3 Equivalent</div>
+        <div class="hospital-phone"><a class="call-btn" href="tel:+4906111770"><span class="ph-type">PHONE</span> +49 0611 1770</a></div>
+      </div>
+      <div class="hospital-row">
+        <div class="hospital-name">Klinikum Weiden</div>
+        <div class="hospital-meta">Grafenwohr &mdash; HN R3 Equivalent</div>
+        <div class="hospital-phone"><a class="call-btn" href="tel:+4909613030"><span class="ph-type">PHONE</span> +49 0961 3030</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Definitive Care / Trauma</div>
+      <div class="hospital-row">
+        <div class="hospital-name">Landstuhl Regional Medical Center</div>
+        <div class="hospital-meta">R4 Definitive Care</div>
+        <div class="hospital-phone"><a class="call-btn" href="tel:+4906371946463211"><span class="ph-type">PHONE</span> +49 06371 94646321</a></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">Armed Forces Medical Examiner (Fatality / Toxicology)</div>
+      <div style="font-size:13px;line-height:1.8;color:var(--text-dim);">
+        <div><strong style="color:var(--text);">Report Fatality:</strong> <a href="tel:2024096811" style="color:var(--gold-light);">202-409-6811</a></div>
+        <div><strong style="color:var(--text);">Toxicology:</strong> <a href="tel:3023468648" style="color:var(--gold-light);">302-346-8648</a> (DSN: 366-8648)</div>
+        <div><strong style="color:var(--text);">Fax:</strong> 302-346-8819</div>
+        <div><strong style="color:var(--text);">Email:</strong> dha.dover.afmes.mbx.information@health.mil</div>
       </div>
     </div>
   </div>
@@ -1014,148 +1114,12 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
 <div class="page" id="page-ref">
   <div class="section">
     <div class="ref-tabs">
-      <button class="ref-tab active" onclick="switchTab(this,'tab-a')">Tab A</button>
-      <button class="ref-tab" onclick="switchTab(this,'tab-b')">Tab B</button>
-      <button class="ref-tab" onclick="switchTab(this,'tab-d')">Tab D</button>
+      <button class="ref-tab active" onclick="switchTab(this,'tab-d')">Tab D</button>
       <button class="ref-tab" onclick="switchTab(this,'tab-e')">Tab E</button>
     </div>
 
-    <!-- TAB A -->
-    <div class="ref-panel active" id="tab-a">
-      <div class="section-title">Tab A &mdash; Alarm Worksheet</div>
-
-      <div class="card" style="background: linear-gradient(135deg,#6B1B1B,#8B2020);border-color:#C0392B;">
-        <div class="card-header" style="color:#FFB3B3;">Primary Alarm</div>
-        <div class="contact-row">
-          <div class="contact-info">
-            <div class="contact-role">Tower/Base Ops &mdash; Ansbach (AAHP)</div>
-            <div class="contact-name">Freq: 138.55 / 376.97</div>
-            <div class="contact-phones">
-              <a class="call-btn" href="tel:+499802830770"><span class="ph-type">DSN</span> 587-0770</a>
-              <a class="call-btn" href="tel:096417058700770"><span class="ph-type">CIV</span> 09641-70587-0770</a>
-            </div>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-info">
-            <div class="contact-role">Tower/Base Ops &mdash; Illesheim (IAHP)</div>
-            <div class="contact-name">Freq: 141.25 / 376.15</div>
-            <div class="contact-phones">
-              <a class="call-btn" href="tel:+499802836503"><span class="ph-type">DSN</span> 587-6503</a>
-              <a class="call-btn" href="tel:096417058706503"><span class="ph-type">CIV</span> 09641-70587-6503</a>
-            </div>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-info">
-            <div class="contact-role">Crash Rescue / Fire</div>
-            <div class="contact-phones">
-              <a class="call-btn" href="tel:112"><span class="ph-type">EMER</span> 112</a>
-              <a class="call-btn" href="tel:098028 3112"><span class="ph-type">CIV</span> 09802-83-112</a>
-            </div>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-info">
-            <div class="contact-role">Hospital Ambulance</div>
-            <div class="contact-phones">
-              <a class="call-btn" href="tel:112"><span class="ph-type">EMER</span> 112</a>
-              <a class="call-btn" href="tel:0980283112"><span class="ph-type">CIV</span> 09802-83-112</a>
-            </div>
-          </div>
-        </div>
-        <div class="contact-row">
-          <div class="contact-info">
-            <div class="contact-role">Law Enforcement</div>
-            <div class="contact-name">Freq: 110</div>
-            <div class="contact-phones">
-              <a class="call-btn" href="tel:+499802831110"><span class="ph-type">DSN</span> 587-1110</a>
-              <a class="call-btn" href="tel:0980283110"><span class="ph-type">CIV</span> 09802-83-110</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">Secondary Alarm &mdash; Griffin Freqs</div>
-        <table class="data-table">
-          <thead><tr><th>Role / Name</th><th>Freq</th><th>Cell</th></tr></thead>
-          <tbody>
-            <tr><td>S-3 MAJ Barnes</td><td>Griffin 3</td><td><a href="tel:016097718116">0160 977-18116</a></td></tr>
-            <tr><td>CDR COL Bock</td><td>Griffin 6</td><td><a href="tel:01622572685">0162 257-2685</a></td></tr>
-            <tr><td>XO MAJ Grubbs</td><td>Griffin 5</td><td><a href="tel:01622676422">0162 267 6422</a></td></tr>
-            <tr><td>Safety CW4 Bowyer</td><td>Griffin 99</td><td><a href="tel:01721424817">0172 142-4817</a></td></tr>
-            <tr><td>S-1 CPT Hafen</td><td>Griffin 1</td><td><a href="tel:01622563391">0162 256-3391</a></td></tr>
-            <tr><td>S-2 CPT Grant</td><td>Griffin 2</td><td><a href="tel:7579414246">757-9414246</a></td></tr>
-            <tr><td>CSM CSM Anderson</td><td>Griffin 7</td><td><a href="tel:01622517057">0162 251-7057</a></td></tr>
-            <tr><td>BAMO CW5 Everett</td><td>Griffin 92</td><td><a href="tel:01622550236">0162 255-0236</a></td></tr>
-            <tr><td>Stands CW5 Weisskopf</td><td>Griffin 00</td><td><a href="tel:015224476649">0152 2447-6649</a></td></tr>
-            <tr><td>CWOB CW5 Hules</td><td>Griffin 8</td><td><a href="tel:01622965412">0162 296-5412</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- TAB B -->
-    <div class="ref-panel" id="tab-b">
-      <div class="section-title">Tab B &mdash; Phone Numbers</div>
-      <div class="card">
-        <div class="card-header">Key Stations</div>
-        <table class="data-table">
-          <thead><tr><th>Station</th><th>DSN / Phone</th></tr></thead>
-          <tbody>
-            <tr><td>V Corps Safety</td><td><a href="tel:+499802835504">312-983-5504</a></td></tr>
-            <tr><td>Katterbach Med Clinic</td><td><a href="tel:+499802833600">314-590-3600</a></td></tr>
-            <tr><td>Katterbach Provost Marshal</td><td><a href="tel:+499802831110">314-587-1110</a></td></tr>
-            <tr><td>12th CAB PAO</td><td><a href="tel:+499802830778">314-587-0778</a></td></tr>
-            <tr><td>Garrison Safety</td><td><a href="tel:+499802831571">314-587-1571</a></td></tr>
-            <tr><td>Armed Forces Med Examiner</td><td><a href="tel:2024096811">202-409-6811</a></td></tr>
-            <tr><td>AFMES Toxicology</td><td><a href="tel:3023468648">302-346-8648</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="card">
-        <div class="card-header">Local Hospitals (R3 Equivalent)</div>
-        <div class="hospital-row">
-          <div class="hospital-name">Ansbach Klinikum</div>
-          <div class="hospital-meta">Ansbach &mdash; HN R3 Equivalent</div>
-          <div class="hospital-phone"><a class="call-btn" href="tel:+4998140"><span class="ph-type">PHONE</span> +49 981 4840</a></div>
-        </div>
-        <div class="hospital-row">
-          <div class="hospital-name">St. Josef Hospital</div>
-          <div class="hospital-meta">Wiesbaden &mdash; HN R3 Equivalent</div>
-          <div class="hospital-phone"><a class="call-btn" href="tel:+4906111770"><span class="ph-type">PHONE</span> +49 0611 1770</a></div>
-        </div>
-        <div class="hospital-row">
-          <div class="hospital-name">Klinikum Weiden</div>
-          <div class="hospital-meta">Grafenwohr &mdash; HN R3 Equivalent</div>
-          <div class="hospital-phone"><a class="call-btn" href="tel:+4909613030"><span class="ph-type">PHONE</span> +49 0961 3030</a></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">Definitive Care / Trauma</div>
-        <div class="hospital-row">
-          <div class="hospital-name">Landstuhl Regional Medical Center</div>
-          <div class="hospital-meta">R4 Definitive Care</div>
-          <div class="hospital-phone"><a class="call-btn" href="tel:+4906371946463211"><span class="ph-type">PHONE</span> +49 06371 94646321</a></div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">Armed Forces Medical Examiner (Fatality / Toxicology)</div>
-        <div style="font-size:13px;line-height:1.7;color:var(--text-dim);">
-          <div><strong style="color:var(--text);">Report Fatality:</strong> <a href="tel:2024096811" style="color:var(--gold-light);">202-409-6811</a></div>
-          <div><strong style="color:var(--text);">Toxicology:</strong> <a href="tel:3023468648" style="color:var(--gold-light);">302-346-8648</a> (DSN: 366-8648)</div>
-          <div><strong style="color:var(--text);">Fax:</strong> 302-346-8819</div>
-          <div><strong style="color:var(--text);">Email:</strong> dha.dover.afmes.mbx.information@health.mil</div>
-        </div>
-      </div>
-    </div>
-
     <!-- TAB D: OVERDUE AIRCRAFT -->
-    <div class="ref-panel" id="tab-d">
+    <div class="ref-panel active" id="tab-d">
       <div class="section-title">Tab D &mdash; PL &amp; Overdue Aircraft</div>
       <div class="card" style="font-size:14px;color:var(--text-dim);margin-bottom:14px;">
         A Precautionary Landing (PL) or overdue aircraft may indicate a Fallen Angel. Initiate immediately.
