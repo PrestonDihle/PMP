@@ -207,6 +207,12 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
   color: var(--text-dim); font-size: 13px; padding: 8px 16px; cursor: pointer; width: 100%; margin-top: 8px;
 }
 .reset-btn:active { background: var(--navy-card); }
+.copy-ws-btn {
+  background: #1a4a2e; border: 1px solid #2e7d4f; border-radius: 8px;
+  color: #5fca8a; font-size: 14px; font-weight: 700; padding: 12px 16px;
+  cursor: pointer; width: 100%; margin-top: 8px; letter-spacing: 0.5px;
+}
+.copy-ws-btn:active { background: #2e7d4f; }
 
 .pri-alarm-block {
   background: linear-gradient(135deg, #6B1B1B, #8B2020);
@@ -674,6 +680,7 @@ body { display: flex; flex-direction: column; max-width: 480px; margin: 0 auto; 
         <textarea class="form-textarea" placeholder="Hoist required? Site security? Marking method? Patient nationality/status? Terrain description?"></textarea>
       </div>
       <button class="reset-btn" onclick="resetForm()">&#8635; Clear Worksheet</button>
+      <button id="copy-ws-btn" class="copy-ws-btn" onclick="copyWorksheet()">&#128203; Copy as Text / SMS</button>
     </div>
   </div>
 </div>
@@ -1310,6 +1317,58 @@ function resetForm() {
   if (!confirm('Clear all worksheet entries?')) return;
   document.querySelectorAll('#worksheet-form input, #worksheet-form textarea').forEach(el => el.value = '');
   document.querySelectorAll('#worksheet-form .toggle-btn').forEach(b => b.classList.remove('sel'));
+}
+
+function copyWorksheet() {
+  const now = new Date().toLocaleString('en-US', {month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  let text = '=== 12th CAB MISHAP WORKSHEET ===\n';
+  text += 'Compiled: ' + now + '\n\n';
+
+  // Walk every form-label and collect its following sibling values
+  // until the next label, reset/copy button, or end of group
+  const allLabels = document.querySelectorAll('#worksheet-form .form-label');
+  allLabels.forEach(labelEl => {
+    const clone = labelEl.cloneNode(true);
+    const hint = clone.querySelector('span');
+    if (hint) hint.remove();
+    const labelText = clone.textContent.trim();
+
+    let line = labelText;
+    let sibling = labelEl.nextElementSibling;
+    while (sibling && !sibling.classList.contains('form-label') &&
+           !sibling.classList.contains('reset-btn') && !sibling.classList.contains('copy-ws-btn')) {
+      if (sibling.classList.contains('toggle-row')) {
+        const sel = sibling.querySelector('.toggle-btn.sel');
+        line += ' ' + (sel ? sel.textContent.trim() : '[—]');
+      } else if (sibling.tagName === 'INPUT' || sibling.tagName === 'TEXTAREA') {
+        const val = sibling.value.trim();
+        if (val) line += '\n  ' + val;
+      }
+      sibling = sibling.nextElementSibling;
+    }
+    text += line + '\n\n';
+  });
+
+  const btn = document.getElementById('copy-ws-btn');
+  const doSuccess = () => {
+    btn.textContent = '\u2713 Copied to Clipboard!';
+    btn.style.background = '#2e7d4f';
+    setTimeout(() => { btn.textContent = '\u{1F4CB} Copy as Text / SMS'; btn.style.background = ''; }, 2800);
+  };
+
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(doSuccess).catch(() => fallbackCopy(text, doSuccess));
+  } else {
+    fallbackCopy(text, doSuccess);
+  }
+}
+
+function fallbackCopy(text, cb) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try { document.execCommand('copy'); cb(); } catch(e) { alert('Copy failed — please copy manually.'); }
+  document.body.removeChild(ta);
 }
 </script>
 </body>
